@@ -1,0 +1,77 @@
+body {
+  background-color: #000;
+}
+a,
+a:hover {
+  text-decoration: none;
+  color: #000;
+}
+a:hover{
+    color:#289fe4;
+}
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.country-flag {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.country-flag img {
+  width: 200px;
+  height: 120px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.fig-icon {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  animation: fing 0.9s ease-in-out infinite;
+}
+@keyframes fing {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .table th {
+    width: 50%;
+  }
+  .country-flag{
+    text-align: center;
+  }
+}
+table {
+  margin-bottom: 0 !important;
+}
+table,
+th,
+td,
+tr {
+  border: none;
+}
+.table th {
+  width: 40%;
+}
+h4 {
+  font-size: 16px;
+}
