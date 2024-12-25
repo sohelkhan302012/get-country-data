@@ -6,8 +6,8 @@ a:hover {
   text-decoration: none;
   color: #000;
 }
-a:hover{
-    color:#289fe4;
+a:hover {
+  color: #289fe4;
 }
 .card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -20,7 +20,8 @@ a:hover{
 .country-flag img {
   width: 200px;
   height: 120px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 .fig-icon {
   position: absolute;
@@ -56,7 +57,7 @@ h1 {
   .table th {
     width: 50%;
   }
-  .country-flag{
+  .country-flag {
     text-align: center;
   }
 }
@@ -75,14 +76,172 @@ tr {
 h4 {
   font-size: 16px;
 }
-#main-data-card{
-    display:none;
+#main-data-card {
+  display: none;
 }
-#error-data-card{
-    position: fixed;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none;
-    color: #fff;
+#error-data-card {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  color: #fff;
+}
+
+/*
+=====
+UIA-TEXT_LOADER
+=====
+*/
+
+.uia-text-loader__text {
+  font-family: var(
+    --uia-text-loader-font-family,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Open Sans,
+    Ubuntu,
+    Fira Sans,
+    Helvetica Neue,
+    sans-serif
+  );
+  font-size: var(--uia-text-loader-font-size, 1rem);
+  text-transform: var(--uia-text-loader-text-transform, uppercase);
+  color: var(--uia-text-loader-text-shadow, rgba(0, 0, 0, 0.2));
+
+  user-select: var(--uia-text-loader-user-select, none);
+}
+
+.uia-text-loader__letter {
+  display: var(--uia-text-loader-letter-display, inline-flex);
+  position: relative;
+}
+
+.uia-text-loader__letter-placeholder {
+  color: var(--uia-text-loader-letter-color, initial);
+
+  position: absolute;
+  inset: 0;
+
+  animation-duration: var(--uia-text-loader-animation-duration, 5s);
+  animation-iteration-count: var(
+    --uia-text-loader-animation-iteration-count,
+    infinite
+  );
+  animation-fill-mode: var(--uia-text-loader-animation-fill-mode, backwards);
+  animation-delay: var(--uia-text-loader-animation-delay);
+}
+
+@media (forced-colors: active) {
+  .uia-text-loader__text {
+    --uia-text-loader-letter-color: var(
+      --uia-text-loader-letter-color-forced,
+      #fefefe
+    );
+    forced-color-adjust: none;
+  }
+}
+
+/* type 1*/
+
+[data-uia-text-loader-type="uia-text-loader-type-1"]
+  .uia-text-loader__letter-placeholder {
+  animation-name: uia-text-loader-1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes uia-text-loader-1 {
+    0%,
+    10%,
+    90%,
+    100% {
+      scale: 0;
+    }
+
+    20%,
+    75% {
+      scale: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes uia-text-loader-1 {
+    0%,
+    10%,
+    90%,
+    100% {
+      opacity: 0;
+    }
+
+    20%,
+    75% {
+      opacity: 1;
+    }
+  }
+}
+
+.uia-text-loader__letter {
+  --uia-text-loader-delay-step: 0.2s;
+}
+
+.uia-text-loader__letter:nth-child(2) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    2 * var(--uia-text-loader-delay-step)
+  );
+}
+
+.uia-text-loader__letter:nth-child(3) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    3 * var(--uia-text-loader-delay-step)
+  );
+}
+
+.uia-text-loader__letter:nth-child(4) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    4 * var(--uia-text-loader-delay-step)
+  );
+}
+
+.uia-text-loader__letter:nth-child(5) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    5 * var(--uia-text-loader-delay-step)
+  );
+}
+
+.uia-text-loader__letter:nth-child(6) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    6 * var(--uia-text-loader-delay-step)
+  );
+}
+
+.uia-text-loader__letter:nth-child(7) .uia-text-loader__letter-placeholder {
+  --uia-text-loader-animation-delay: calc(
+    7 * var(--uia-text-loader-delay-step)
+  );
+}
+
+/*
+=====
+PAGE STYLES
+=====
+*/
+:root {
+  --uia-text-loader-font-family: "Cherry Bomb One", cursive;
+  --uia-text-loader-font-size: 1.5rem;
+  --uia-text-loader-letter-color: var(--accent-mode-color);
+  --main-mode-color: #2e3444;
+  --accent-mode-color: #e1e4e5;
+}
+
+
+.page__loader {
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: none;
+  transform: translateX(-50%);
 }

@@ -18,6 +18,7 @@ let countryBorderCountry = document.getElementById("countryBorderCountry");
 let errordatacard = document.getElementById("error-data-card");
 let maindatacard = document.getElementById("main-data-card");
 let selectCountryinput = document.getElementById("selectCountry");
+let pageloader = document.getElementById("pageloader");
 
 function getCountryDataspacific() {
   let countrydata = new XMLHttpRequest();
@@ -126,5 +127,9 @@ selectCountryinput.addEventListener("click", function () {
   getCountryData();
 });
 selectbtn.addEventListener("click", function () {
-  getCountryDataspacific();
+  pageloader.style.display = "block";
+  setTimeout(() => {
+    pageloader.style.display = "none";
+    getCountryDataspacific();
+  }, 2000);
 });
