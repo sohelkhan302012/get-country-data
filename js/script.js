@@ -89,13 +89,7 @@ function getCountryDataspacific() {
         errordatacard.style.display = "none";
       }, 2000);
     } else {
-      errordatacard.textContent =
-        "Error fetching data. Please try again later.";
-      errordatacard.style.background = "red";
-      errordatacard.style.display = "block";
-      setTimeout(function () {
-        errordatacard.style.display = "none";
-      }, 2000);
+      errordatacard.style.display = "none";
     }
   });
   countrydata.open(
