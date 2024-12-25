@@ -75,3 +75,14 @@ tr {
 h4 {
   font-size: 16px;
 }
+#main-data-card{
+    display:none;
+}
+#error-data-card{
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    color: #fff;
+}

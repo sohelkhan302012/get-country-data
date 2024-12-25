@@ -15,15 +15,25 @@ let countryIDD = document.getElementById("countryIDD");
 let countryRegionSubregion = document.getElementById("countryRegionSubregion");
 let countryPopulation = document.getElementById("countryPopulation");
 let countryBorderCountry = document.getElementById("countryBorderCountry");
+let errordatacard = document.getElementById("error-data-card");
+let maindatacard = document.getElementById("main-data-card");
+let selectCountryinput = document.getElementById("selectCountry");
 
-function getCountryData() {
+function getCountryDataspacific() {
+  let countrydata = new XMLHttpRequest();
   let selectCountry = document.getElementById("selectCountry").value.trim();
-
-  let country = new XMLHttpRequest();
-  country.addEventListener("readystatechange", function () {
+  countrydata.addEventListener("readystatechange", function () {
     if (this.readyState === 4 && this.status === 200) {
       let data = JSON.parse(this.responseText);
-      console.log(data);
+      errordatacard.textContent = "Country Data is successfully loaded.";
+      errordatacard.style.background = "green";
+      errordatacard.style.display = "block";
+      setTimeout(function () {
+        errordatacard.style.display = "none";
+      }, 2000);
+      maindatacard.style.display = "block";
+      //   console.log(data);
+
       courntryName.textContent = data[0].name.common;
       courntryFlagimg.src = data[0].flags.png;
       let nativeName = data[0].name.nativeName;
@@ -59,22 +69,62 @@ function getCountryData() {
       }
       countryIDD.textContent = data[0].idd.root + data[0].idd.suffixes[0];
       countryRegionSubregion.textContent = `${data[0].region}  / ${data[0].subregion}`;
-      for (let currencyCode1 in data[0].gini) {
-        if (data[0].gini.hasOwnProperty(currencyCode1)) {
-          countryPopulation.textContent = `${data[0].population} (${currencyCode1}) `;
+      let Census;
+      if (data[0].gini) {
+        for (Census in data[0].gini) {
+          if (data[0].gini.hasOwnProperty(Census)) {
+          }
         }
+      } else {
+        Census = "Not Available";
       }
+      countryPopulation.textContent = `${data[0].population} (${Census}) `;
       countryBorderCountry.textContent = data[0].borders;
+    } else if (this.status == 404) {
+      errordatacard.textContent = "Error 404. Please check your api.";
+      errordatacard.style.background = "red";
+      errordatacard.style.display = "block";
+      setTimeout(function () {
+        errordatacard.style.display = "none";
+      }, 2000);
+    } else {
+      errordatacard.textContent =
+        "Error fetching data. Please try again later.";
+      errordatacard.style.background = "red";
+      errordatacard.style.display = "block";
+      setTimeout(function () {
+        errordatacard.style.display = "none";
+      }, 2000);
     }
   });
-  country.open(
+  countrydata.open(
     "GET",
     `https://restcountries.com/v3.1/name/${selectCountry}`,
     true
   );
+  countrydata.send();
+}
+
+function getCountryData() {
+  let country = new XMLHttpRequest();
+  country.addEventListener("readystatechange", function () {
+    if (this.readyState === 4 && this.status === 200) {
+      let dataall = JSON.parse(this.responseText);
+      dataall.forEach((country) => {
+        const option = document.createElement("option");
+        option.value = country.name.common;
+        option.textContent = country.name.common;
+        selectCountryinput.appendChild(option);
+      });
+    }
+  });
+  country.open("GET", `https://restcountries.com/v3.1/all`, true);
   country.send();
 }
 
-selectbtn.addEventListener("click", function () {
+selectCountryinput.addEventListener("click", function () {
   getCountryData();
+});
+selectbtn.addEventListener("click", function () {
+  getCountryDataspacific();
 });
